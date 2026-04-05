@@ -225,7 +225,7 @@ On first run, the script downloads ~30 years of NCVS data from the BJS API and c
 
 ### Manual data download (if the API is unavailable)
 
-If the automatic download fails (e.g., institutional network restrictions):
+If the automatic download fails:
 
 1. Visit the [BJS NCVS API page](https://bjs.ojp.gov/national-crime-victimization-survey-ncvs-api)
 2. Query the API directly at `https://api.ojp.gov/bjsdataset/v1/gcuy-rt5g.json`
