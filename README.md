@@ -62,15 +62,15 @@ Simple Assault dominates the sample (~63%), followed by Robbery and Aggravated A
 
 Victim–offender relationships vary substantially by crime type. Sexual assault and simple assault show the highest share of known aggressors, while robbery is predominantly committed by strangers.
 
-![Relationship by crime]([outputs/figures/](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/)fig3_relationship_by_crime.png)
+![Relationship by crime]((https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig3_relationship_by_crime.png)
 
 Overall reporting rates are low across all crime types, with Aggravated Assault showing the highest reporting rate and Personal Theft the lowest.
 
-![Reporting rate](outputs/figures/fig4_reporting_rate.png)
+![Reporting rate](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig4_reporting_rate.png)
 
 Among unreported crimes specifically, the share involving a known aggressor is markedly higher for sexual assault — motivating the core research question.
 
-![Unreported relationship](outputs/figures/fig5_unreported_relationship.png)
+![Unreported relationship](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig5_unreported_relationship.png)
 
 ---
 
@@ -129,13 +129,13 @@ Before matching, the treated (knew aggressor) and control (stranger) groups diff
 
 The treated group is disproportionately female, younger, lower-income, and less likely to be married — all characteristics that are themselves associated with reporting behaviour. A naive comparison of reporting rates would conflate the effect of the victim–offender relationship with these demographic differences, directly motivating the PSM approach.
 
-![Pre-matching means](outputs/figures/fig6_prebalance_means.png)
+![Pre-matching means](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig6_prebalance_means.png)
 
 ### Common Support
 
 The propensity score distributions of treated and control units overlap substantially, satisfying the common support assumption.
 
-![Common support](outputs/figures/fig7_common_support.png)
+![Common support](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig7_common_support.png)
 
 ### Post-Matching Balance
 
@@ -148,13 +148,13 @@ After 1:1 nearest-neighbour matching within crime-type strata, all SMDs fall to 
 | Minor (12–17) | 0.202 | 0.000 | ✓ |
 | Low Income (<$35k) | 0.185 | 0.000 | ✓ |
 
-![Love plot](outputs/figures/fig8_love_plot.png)
+![Love plot](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig8_love_plot.png)
 
 ### Treatment Effect: How Matching Changes the Estimates
 
 The figure below compares the `relationship_dummy` coefficient (effect of knowing one's aggressor on reporting log-odds) across all crime types, before and after matching. The shift between naive and matched estimates is itself evidence that selection bias was present in the unmatched sample and has been corrected for.
 
-![Coefficient comparison](outputs/figures/fig10_coef_comparison.png)
+![Coefficient comparison](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig10_coef_comparison.png)
 
 ### Focus: Rape and Sexual Assault
 
@@ -171,7 +171,7 @@ The naive model already identified a significant negative effect, but **matching
 
 The figure below shows how each covariate's coefficient shifts between the naive and matched regressions for the sexual assault stratum:
 
-![Rape coefficient shift](outputs/figures/fig11_rape_coef_shift.png)
+![Rape coefficient shift](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig11_rape_coef_shift.png)
 
 Two additional covariate findings warrant attention:
 
