@@ -11,7 +11,7 @@
 
 > **Does having a prior relationship with one's aggressor causally reduce the probability of reporting the crime to the police?**
 
-Victims of interpersonal violence are consistently less likely to report their victimization to law enforcement than victims of stranger violence. Yet the extent to which this gap reflects a *causal* effect of the victim–offender relationship — rather than compositional differences in the types of crimes, victims, or circumstances involved — remains underexplored in the empirical literature.
+Victims of interpersonal violence are consistently less likely to report their victimization to law enforcement than victims of stranger violence. Yet the extent to which this gap reflects a *causal* effect of the victim–offender relationship, rather than compositional differences in the types of crimes, victims, or circumstances involved, remains underexplored in the empirical literature.
 
 This project uses **Propensity Score Matching (PSM)** on 30 years of the **National Crime Victimization Survey (NCVS)** to estimate the **Average Treatment Effect on the Treated (ATT)**: the reduction in reporting probability attributable to knowing one's aggressor, for victims who did know their aggressor.
 
@@ -27,7 +27,7 @@ This project uses **Propensity Score Matching (PSM)** on 30 years of the **Natio
 | **Raw records** | 67,779 incidents |
 | **Working sample** | 54,648 (after listwise deletion of missing values) |
 | **Unit of observation** | Individual victimization incident |
-| **Survey weight** | `wgtviccy` (used in descriptive figures only — see [Note on Weights](#note-on-survey-weights)) |
+| **Survey weight** | `wgtviccy` (used in descriptive figures only (see [Note on Weights](#note-on-survey-weights))) |
 
 ### Variables
 
@@ -50,25 +50,25 @@ This project uses **Propensity Score Matching (PSM)** on 30 years of the **Natio
 | `reported_dummy` | 1,095 | 1.6% |
 | `married_dummy` | 270 | 0.4% |
 
-Missingness in `relationship_dummy` arises when the victim could not identify the number or identity of offenders — these cases are excluded as they are not classifiable as either treatment or control.
+Missingness in `relationship_dummy` arises when the victim could not identify the number or identity of offenders, these cases are excluded as they are not classifiable as either treatment or control.
 
 ---
 
 ## Descriptive Overview
 
-Simple Assault dominates the sample (~63%), followed by Robbery and Aggravated Assault. Rape and Sexual Assault represent roughly 5% of incidents — a figure that is itself likely a substantial undercount given well-documented under-reporting.
+Simple Assault dominates the sample (~63%), followed by Robbery and Aggravated Assault. Rape and Sexual Assault represent roughly 5% of incidents, a figure that is itself likely a substantial undercount given well-documented under-reporting.
 
 ![Crime composition](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig1_crime_composition.png)
 
 Victim–offender relationships vary substantially by crime type. Sexual assault and simple assault show the highest share of known aggressors, while robbery is predominantly committed by strangers.
 
-![Relationship by crime]((https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig3_relationship_by_crime.png)
+![Relationship by crime](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig3_relationship_by_crime.png)
 
 Overall reporting rates are low across all crime types, with Aggravated Assault showing the highest reporting rate and Personal Theft the lowest.
 
 ![Reporting rate](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig4_reporting_rate.png)
 
-Among unreported crimes specifically, the share involving a known aggressor is markedly higher for sexual assault — motivating the core research question.
+Among unreported crimes specifically, the share involving a known aggressor is markedly higher for sexual assault, motivating the core research question.
 
 ![Unreported relationship](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig5_unreported_relationship.png)
 
@@ -83,7 +83,7 @@ We estimate a causal effect using **Propensity Score Matching**. The identifying
 1. **Conditional Independence Assumption (CIA / Unconfoundedness)**
    Conditional on the observed covariates $(X)$, treatment assignment (knowing one's aggressor) is independent of potential outcomes:
    $$Y(0), Y(1) \perp D \mid X$$
-   This is a strong assumption. Unmeasured confounders — emotional dependency, fear of retaliation, social norms, prior victimization history — may still bias the estimates.
+   This is a strong assumption. Unmeasured confounders, emotional dependency, fear of retaliation, social norms, prior victimization history, may still bias the estimates.
 
 2. **Common Support**
    For every propensity score value in the treated group, there exists a comparable control unit:
@@ -127,7 +127,7 @@ Before matching, the treated (knew aggressor) and control (stranger) groups diff
 | Minor (12–17) | 0.137 | 0.214 | +0.077 | +23.38 | *** |
 | Low Income (<$35k) | 0.459 | 0.551 | +0.092 | +21.55 | *** |
 
-The treated group is disproportionately female, younger, lower-income, and less likely to be married — all characteristics that are themselves associated with reporting behaviour. A naive comparison of reporting rates would conflate the effect of the victim–offender relationship with these demographic differences, directly motivating the PSM approach.
+The treated group is disproportionately female, younger, lower-income, and less likely to be married, all characteristics that are themselves associated with reporting behaviour. A naive comparison of reporting rates would conflate the effect of the victim–offender relationship with these demographic differences, directly motivating the PSM approach.
 
 ![Pre-matching means](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig6_prebalance_means.png)
 
@@ -139,7 +139,7 @@ The propensity score distributions of treated and control units overlap substant
 
 ### Post-Matching Balance
 
-After 1:1 nearest-neighbour matching within crime-type strata, all SMDs fall to 0.000 — well below the 0.10 threshold — confirming near-perfect balance on all observed covariates.
+After 1:1 nearest-neighbour matching within crime-type strata, all SMDs fall to 0.000, well below the 0.10 threshold, confirming near-perfect balance on all observed covariates.
 
 | Covariate | SMD Pre | SMD Post | Balanced |
 |---|---|---|---|
@@ -167,7 +167,7 @@ The most policy-relevant and econometrically instructive results are in the rape
 | **Change in odds of reporting** | −25.4% | −61.0% |
 | **N** | 2,962 | 4,124 |
 
-The naive model already identified a significant negative effect, but **matching reveals the true magnitude to be three times larger**. The matched estimate implies that for a sexual assault victim who knew her aggressor, the odds of reporting to police are **61% lower** than for an observationally comparable victim assaulted by a stranger. Selection bias — specifically the overrepresentation of female, younger, and lower-income victims in the treatment group — was attenuating the apparent effect in the naive regression.
+The naive model already identified a significant negative effect, but **matching reveals the true magnitude to be three times larger**. The matched estimate implies that for a sexual assault victim who knew her aggressor, the odds of reporting to police are **61% lower** than for an observationally comparable victim assaulted by a stranger. Selection bias, specifically the overrepresentation of female, younger, and lower-income victims in the treatment group, was attenuating the apparent effect in the naive regression.
 
 The figure below shows how each covariate's coefficient shifts between the naive and matched regressions for the sexual assault stratum:
 
@@ -175,11 +175,11 @@ The figure below shows how each covariate's coefficient shifts between the naive
 
 Two additional covariate findings warrant attention:
 
-**Minor (12–17)**: the coefficient increases from +0.786 (naive) to +1.563 (matched). Once compositional confounds are removed, minor victims of sexual assault are substantially *more* likely to report — likely because reporting is often initiated by a parent, guardian, or school official rather than the victim herself.
+**Minor (12–17)**: the coefficient increases from +0.786 (naive) to +1.563 (matched). Once compositional confounds are removed, minor victims of sexual assault are substantially *more* likely to report, likely because reporting is often initiated by a parent, guardian, or school official rather than the victim herself.
 
-**Low Income**: the coefficient reverses sign, from +0.145 (naive, not significant) to −1.628 (matched, p<0.001). In the unmatched sample, lower-income victims are disproportionately in the treatment group and in crime categories with lower baseline reporting rates, creating an upward bias. Once those confounds are removed by matching, lower-income sexual assault victims are revealed to be substantially *less* likely to report — consistent with the secondary victimization literature (greater distrust of police, economic dependence on the aggressor, limited access to victim services).
+**Low Income**: the coefficient reverses sign, from +0.145 (naive, not significant) to −1.628 (matched, p<0.001). In the unmatched sample, lower-income victims are disproportionately in the treatment group and in crime categories with lower baseline reporting rates, creating an upward bias. Once those confounds are removed by matching, lower-income sexual assault victims are revealed to be substantially *less* likely to report, consistent with the secondary victimization literature (greater distrust of police, economic dependence on the aggressor, limited access to victim services).
 
-> **Caution**: These estimates rest on the CIA (unconfoundedness) assumption, which cannot be tested. Unmeasured confounders — emotional dependency, fear of retaliation, community norms — may still bias the estimates. Results should be interpreted as *conditional associations after removing observable selection bias*, not as purely causal effects.
+> **Caution**: These estimates rest on the CIA (unconfoundedness) assumption, which cannot be tested. Unmeasured confounders, emotional dependency, fear of retaliation, community norms, may still bias the estimates. Results should be interpreted as *conditional associations after removing observable selection bias*, not as purely causal effects.
 
 ---
 
