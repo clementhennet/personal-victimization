@@ -58,11 +58,11 @@ Missingness in `relationship_dummy` arises when the victim could not identify th
 
 Simple Assault dominates the sample (~63%), followed by Robbery and Aggravated Assault. Rape and Sexual Assault represent roughly 5% of incidents — a figure that is itself likely a substantial undercount given well-documented under-reporting.
 
-![Crime composition](outputs/figures/fig1_crime_composition.png)
+![Crime composition](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig1_crime_composition.png)
 
 Victim–offender relationships vary substantially by crime type. Sexual assault and simple assault show the highest share of known aggressors, while robbery is predominantly committed by strangers.
 
-![Relationship by crime](outputs/figures/fig3_relationship_by_crime.png)
+![Relationship by crime]([outputs/figures/](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/)fig3_relationship_by_crime.png)
 
 Overall reporting rates are low across all crime types, with Aggravated Assault showing the highest reporting rate and Personal Theft the lowest.
 
