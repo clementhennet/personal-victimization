@@ -2,7 +2,6 @@
 ### A Causal Inference Analysis of the National Crime Victimization Survey (1993–2023)
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Data: BJS NCVS](https://img.shields.io/badge/Data-BJS%20NCVS-green)](https://bjs.ojp.gov/national-crime-victimization-survey-ncvs-api)
 
 ---
