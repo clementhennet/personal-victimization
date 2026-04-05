@@ -56,19 +56,19 @@ Missingness in `relationship_dummy` arises when the victim could not identify th
 
 ## Descriptive Overview
 
-Simple Assault dominates the sample (~63%), followed by Robbery and Aggravated Assault. Rape and Sexual Assault represent roughly 5% of incidents, a figure that is itself likely a substantial undercount given well-documented under-reporting.
+Simple Assault dominates the sample (~63%), followed by Robbery and Aggravated Assault. Rape and Sexual Assault represent roughly 5% of incidents, a figure that is likely be under-estimated due to well-documented under-reporting.
 
 ![Crime composition](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig1_crime_composition.png)
 
-Victim–offender relationships vary substantially by crime type. Sexual assault and simple assault show the highest share of known aggressors, while robbery is predominantly committed by strangers.
+Victim–offender relationships vary substantially by types of crimes. Sexual assault and simple assault are the the types of crime wherein victims knew their aggressors the most, while robbery and personal theft/larceny are predominantly committed by unknown offenders.
 
 ![Relationship by crime](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig3_relationship_by_crime.png)
 
-Overall reporting rates are low across all crime types, with Aggravated Assault showing the highest reporting rate and Personal Theft the lowest.
+Overall reporting rates are low across all crime types, with Aggravated Assault adn Robbery show the highest reporting rate and Rape / Sexual Assault the lowest.
 
 ![Reporting rate](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig4_reporting_rate.png)
 
-Among unreported crimes specifically, the share involving a known aggressor is markedly higher for sexual assault, motivating the core research question.
+Among (estimated) unreported crimes specifically, the share involving a known aggressor is markedly higher for sexual assault, motivating the core research question.
 
 ![Unreported relationship](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig5_unreported_relationship.png)
 
@@ -98,13 +98,13 @@ We estimate a causal effect using **Propensity Score Matching**. The identifying
 We target the **Average Treatment Effect on the Treated (ATT)**, not the population ATE:
 $$\text{ATT} = E[Y(1) - Y(0) \mid D = 1]$$
 
-The ATT answers: *"For victims who knew their aggressor, how much did that relationship reduce their probability of reporting?"* This is the policy-relevant quantity when designing outreach for victims of interpersonal violence.
+The ATT answers: *"For victims who knew their aggressor, how much did that relationship reduce their probability of reporting?"* 
 
 ### PSM Procedure
 
 1. **Propensity score estimation**: logistic regression of treatment $(D)$ on covariates $(X)$.
 2. **Stratified 1:1 nearest-neighbour matching** within crime-type strata (`newoff`). Stratifying by crime type removes it as a confound, since victim–offender relationship distributions vary substantially across crime categories.
-3. **Balance diagnostics**: Standardized Mean Differences (SMD) before and after matching. Rule of thumb: SMD < 0.10 indicates adequate balance (Stuart 2010).
+3. **Balance diagnostics**: Standardized Mean Differences (SMD) before and after matching. 
 4. **Outcome estimation**: doubly-robust logistic regression on the matched sample, with full covariate adjustment.
 5. **Average Marginal Effects (AME)** computed from the matched-sample logit for interpretable probability-scale estimates.
 
@@ -118,7 +118,7 @@ Survey weights (`wgtviccy`) are applied **only for the descriptive figures**. Th
 
 ### Pre-Matching Balance
 
-Before matching, the treated (knew aggressor) and control (stranger) groups differ significantly on all observed covariates:
+Before matching, the treated (knew aggressor) and control (unknown) groups differ significantly on all observed covariates:
 
 | Covariate | Did Not Know | Knew Aggressor | Difference | Z-stat | Sig. |
 |---|---|---|---|---|---|
@@ -127,7 +127,7 @@ Before matching, the treated (knew aggressor) and control (stranger) groups diff
 | Minor (12–17) | 0.137 | 0.214 | +0.077 | +23.38 | *** |
 | Low Income (<$35k) | 0.459 | 0.551 | +0.092 | +21.55 | *** |
 
-The treated group is disproportionately female, younger, lower-income, and less likely to be married, all characteristics that are themselves associated with reporting behaviour. A naive comparison of reporting rates would conflate the effect of the victim–offender relationship with these demographic differences, directly motivating the PSM approach.
+The treated group is disproportionately female, younger, lower-income, and less likely to be married, all characteristics that are themselves associated with reporting behaviour. A naive comparison of reporting rates would conflate the effect of the victim–offender relationship with these demographic differences, thus motivating the PSM approach.
 
 ![Pre-matching means](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig6_prebalance_means.png)
 
@@ -139,7 +139,7 @@ The propensity score distributions of treated and control units overlap substant
 
 ### Post-Matching Balance
 
-After 1:1 nearest-neighbour matching within crime-type strata, all SMDs fall to 0.000, well below the 0.10 threshold, confirming near-perfect balance on all observed covariates.
+After 1:1 nearest-neighbour matching within crime-type strata, all SMDs fall to 0.000 confirming near-perfect balance on all observed covariates.
 
 | Covariate | SMD Pre | SMD Post | Balanced |
 |---|---|---|---|
@@ -158,7 +158,7 @@ The figure below compares the `relationship_dummy` coefficient (effect of knowin
 
 ### Focus: Rape and Sexual Assault
 
-The most policy-relevant and econometrically instructive results are in the rape/sexual assault stratum.
+There are instructive results in the case of rape/sexual assaults.
 
 | | Naive (unmatched) | Matched (PSM) |
 |---|---|---|
@@ -167,15 +167,15 @@ The most policy-relevant and econometrically instructive results are in the rape
 | **Change in odds of reporting** | −25.4% | −61.0% |
 | **N** | 2,962 | 4,124 |
 
-The naive model already identified a significant negative effect, but **matching reveals the true magnitude to be three times larger**. The matched estimate implies that for a sexual assault victim who knew her aggressor, the odds of reporting to police are **61% lower** than for an observationally comparable victim assaulted by a stranger. Selection bias, specifically the overrepresentation of female, younger, and lower-income victims in the treatment group, was attenuating the apparent effect in the naive regression.
+The naive model already identified a significant negative effect, but **matching reveals the true magnitude to be three times larger**. The matched estimate implies that for a sexual assault victim who knew her aggressor, the odds of reporting to police are **61% lower** than for an observationally comparable victim assaulted by a stranger. Selection bias, specifically the overrepresentation of female, younger, and lower-income victims in the treatment group, attenuated the  effect in the naive regression.
 
-The figure below shows how each covariate's coefficient shifts between the naive and matched regressions for the sexual assault stratum:
+The figure below shows how each covariate's coefficient shifts between the naive and matched regressions for the sexual assault case:
 
 ![Rape coefficient shift](https://raw.githubusercontent.com/clementhennet/personal-victimization/refs/heads/main/fig11_rape_coef_shift.png)
 
-Two additional covariate findings warrant attention:
+Two additional insightful covariate findings:
 
-**Minor (12–17)**: the coefficient increases from +0.786 (naive) to +1.563 (matched). Once compositional confounds are removed, minor victims of sexual assault are substantially *more* likely to report, likely because reporting is often initiated by a parent, guardian, or school official rather than the victim herself.
+**Minor (12–17)**: the coefficient increases from +0.786 (naive) to +1.563 (matched). Once confounds are removed, minor victims of sexual assault are substantially *more* likely to report, likely because reporting is often initiated by a parent, guardian, or school official rather than the victim herself.
 
 **Low Income**: the coefficient reverses sign, from +0.145 (naive, not significant) to −1.628 (matched, p<0.001). In the unmatched sample, lower-income victims are disproportionately in the treatment group and in crime categories with lower baseline reporting rates, creating an upward bias. Once those confounds are removed by matching, lower-income sexual assault victims are revealed to be substantially *less* likely to report, consistent with the secondary victimization literature (greater distrust of police, economic dependence on the aggressor, limited access to victim services).
 
@@ -244,9 +244,3 @@ The script detects the cached file and skips the API call automatically.
 - Lenis, D., Nguyen, T. Q., Dong, N., & Stuart, E. A. (2019). It's all about balance: propensity score matching in the context of complex survey data. *Biostatistics*, 20(1), 147–163.
 - Robins, J. M., & Rotnitzky, A. (1995). Semiparametric efficiency in multivariate regression models with missing data. *Journal of the American Statistical Association*, 90(429), 122–129.
 - Stuart, E. A. (2010). Matching methods for causal inference: a review and a look forward. *Statistical Science*, 25(1), 1–21.
-
----
-
-## License
-
-MIT
