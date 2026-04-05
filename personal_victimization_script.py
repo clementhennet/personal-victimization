@@ -75,7 +75,7 @@ sns.set_theme(style="whitegrid", font_scale=1.1)
 plt.rcParams.update({"figure.dpi": 150, "savefig.bbox": "tight"})
 
 # =============================================================================
-# 1. DATA ACQUISITION
+# 1. IMPORT DATA
 # =============================================================================
 
 API_URL  = "https://api.ojp.gov/bjsdataset/v1/gcuy-rt5g.json"
@@ -85,12 +85,7 @@ CACHE    = "victimization_data.csv"
 def fetch_ncvs(url: str, years: list[int], cache_path: str) -> pd.DataFrame:
     """
     Download NCVS Select Personal Victimization records from the BJS API
-    for the requested years.  Results are cached locally to avoid repeated
-    downloads.
-
-    The new endpoint (api.ojp.gov, updated July 2025) does not support
-    server-side year filtering via SOQL.  We download the full dataset with
-    a high $limit and filter by year client-side.
+    for the requested years.
 
     Parameters
     ----------
@@ -446,7 +441,7 @@ Before estimating the propensity score, we verify that the treated (knew aggress
 and control (did not know) groups differ meaningfully on observed covariates.
 We use:
   (a) a group-means table for inspection, and
-  (b) two-sided z-tests for proportions (all covariates are binary).
+  (b) two-sided z-tests for proportions (all covariates are binary)
 
 The z-test is appropriate here since all variables are binary proportions.
 """
@@ -519,7 +514,7 @@ Naive logistic regression on the full (unmatched) sample.
 Interpretation
 --------------
 Coefficients are log-odds. A positive coefficient on 'relationship_dummy'
-would imply that knowing one's aggressor is associated with *higher* reporting
+would imply that knowing one's aggressor is associated with higher reporting
 odds — but this could be entirely driven by compositional differences across
 crime types and victim demographics. These estimates do NOT have a causal
 interpretation.
@@ -578,9 +573,8 @@ crime categories.
 ATT vs. ATE
 -----------
 We target the ATT: the effect of knowing one's aggressor on reporting,
-*for victims who knew their aggressor*.  This is the policy-relevant
-quantity — we want to understand the barrier to reporting faced by
-victims with a prior relationship to their attacker.
+for victims who knew their aggressor.  We want to understand the barrier
+to reporting faced by victims with a prior relationship to their attacker.
 """
 
 print("\n" + "=" * 60)
@@ -649,9 +643,7 @@ print(f"\n[INFO] Matched sample: {len(matched_data):,} obs "
 # =============================================================================
 
 """
-Standardized Mean Difference (SMD) is the standard balance metric.
-Rule of thumb: SMD < 0.10 indicates adequate balance (Stuart 2010;
-Caliendo & Kopeinig 2008). We plot SMDs before and after matching.
+We plot Standardized Mean Differences (SMDs) before and after matching.
 """
 
 def smd(data: pd.DataFrame, vars_: list) -> dict:
@@ -716,13 +708,12 @@ We estimate the ATT in two ways:
     ATT_hat = E[reported | treated, matched] − E[reported | control, matched]
 
 (b) Doubly-robust logit regression on the matched sample with full covariate
-    adjustment.  This "bias-corrects" for any residual imbalance remaining
-    after matching and is the recommended approach (Robins & Rotnitzky 1995;
-    Ho et al. 2007).
+    adjustment. Bias-correction for any residual imbalance remaining
+    after matching (Robins & Rotnitzky 1995; Ho et al. 2007).
 
 Coefficients from the logistic regression are log-odds.  We compute Average
 Marginal Effects (AMEs) for interpretability: the AME gives the average
-change in the *probability* of reporting associated with a one-unit change
+change in the probability of reporting associated with a one-unit change
 in the regressor.
 """
 
@@ -789,12 +780,8 @@ print(matched_table)
 AMEs are computed by:
   1. Predicting Pr(Y=1) for each observation with the actual X values.
   2. Predicting Pr(Y=1) for each observation with the variable of interest
-     shifted by +1 (for binary vars, flip 0→1).
+     shifted by +1.
   3. Taking the sample average of the differences.
-
-For a binary treatment this is equivalent to the partial effect at the mean
-only when the distribution of X is symmetric; the sample-average AME is
-preferable.
 """
 
 def compute_ame(results, data: pd.DataFrame, var: str) -> float:
@@ -839,13 +826,13 @@ We compare coefficients on relationship_dummy and the key covariates between
 the naive (unmatched) and matched logistic regressions.
  
 The focus is on the Rape/Sexual Assault column (crime type 1), where the
-effect of selection bias is most pronounced.  We also flag notable sign
-reversals and coefficient shifts across other covariates.
+effect of selection bias is most pronounced.  I also highlight a sign
+reversal and coefficient shifts across other covariates.
  
 Reading the table
 -----------------
 All coefficients are log-odds.  A negative coefficient on relationship_dummy
-means knowing one's aggressor *reduces* the log-odds of reporting.
+means knowing one's aggressor reduces the log-odds of reporting.
 We convert to odds ratios (exp(coef)) for interpretability and compute the
 percentage change in odds: (OR - 1) * 100.
 """
@@ -943,7 +930,7 @@ for var, label in FOCUS_VARS.items():
           f"{r['matched_ame']:>+11.3f}")
  
  
-# --- 10c. Narrative print-out ------------------------------------------------
+# --- 10c. Narrative ----------------------------------------------------------
  
 rel = coef_row("relationship_dummy", naive_rape, matched_rape,
                rape_naive_data, rape_matched_data)
