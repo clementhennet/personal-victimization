@@ -24,7 +24,7 @@ This project uses **Propensity Score Matching (PSM)** on 30 years of the **Natio
 | **API endpoint** | `https://api.ojp.gov/bjsdataset/v1/gcuy-rt5g.json` |
 | **Years** | 1993–2023 |
 | **Raw records** | 67,779 incidents |
-| **Working sample** | 54,648 (after listwise deletion of missing values) |
+| **Working sample** | 54,648 (after removing missing values) |
 | **Unit of observation** | Individual victimization incident |
 | **Survey weight** | `wgtviccy` (used in descriptive figures only (see [Note on Weights](#note-on-survey-weights))) |
 
